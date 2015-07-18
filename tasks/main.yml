@@ -1,0 +1,29 @@
+---
+- name: create ext volume for configs
+  file: state=directory path={{ ext_influxdb_conf_volume }}
+
+- name: create ext volume for data
+  file: state=directory path={{ ext_influxdb_data_volume }}
+
+- name: put config.toml
+  template: src=config.toml dest={{ ext_influxdb_conf_volume }}/config.toml
+
+- name: check if an influxdb container is started
+  command: bash -c "docker ps | grep influxdb"
+  ignore_errors: True
+  register: result
+
+- name: start an influxdb container
+  command: docker run -d
+              -h {{ ansible_hostname }}-influxdb
+              --dns {{ ansible_docker0.ipv4.address }}
+              --dns 8.8.8.8
+              --read-only=true
+              -v {{ ext_influxdb_conf_volume }}/config.toml:/config/config.toml
+              -v {{ ext_influxdb_data_volume }}:/data
+              -v {{ ext_influxdb_var_volume }}:/var/opt/influxdb
+              -p {{ influxdb_api_port }}:8086
+              -p {{ influxdb_admin_port }}:8083
+              --name=influxdb gitinsky/influxdb:0.1.0
+  register: docker_id
+  when: result|failed
