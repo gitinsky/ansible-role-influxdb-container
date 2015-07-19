@@ -70,6 +70,8 @@ reporting-disabled = false
 
 [[graphite]]
   enabled = true
+  batch-size = 5000
+  batch-timeout = "90s"
   # bind-address = ":2003"
   # protocol = "tcp"
   # consistency-level = "one"
