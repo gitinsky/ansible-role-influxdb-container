@@ -19,6 +19,7 @@
               --dns {{ ansible_docker0.ipv4.address }}
               --dns 8.8.8.8
               --read-only=true
+              --restart=always
               -v {{ ext_influxdb_conf_volume }}/config.toml:/config/config.toml
               -v {{ ext_influxdb_data_volume }}:/data
               -v {{ ext_influxdb_var_volume }}:/var/opt/influxdb
