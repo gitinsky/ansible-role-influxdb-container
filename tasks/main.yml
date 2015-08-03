@@ -26,6 +26,6 @@
               -p {{ influxdb_api_port }}:8086
               -p {{ influxdb_admin_port }}:8083
               -p {{ influxdb_graphite_port }}:2003
-              --name=influxdb gitinsky/influxdb:0.1.0
+              --name=influxdb gitinsky/influxdb:0.1.1
   register: docker_id
   when: result|failed
