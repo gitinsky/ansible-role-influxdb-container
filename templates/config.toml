@@ -13,7 +13,7 @@ reporting-disabled = false
 
 [admin]
   enabled = true
-  port = 8083
+  bind-address = ":8083"
   assets = "/opt/influxdb/current/admin"
 
 [api]
@@ -24,9 +24,6 @@ reporting-disabled = false
   enabled = false
 
 [opentsdb]
-  enabled = false
-
-[udp]
   enabled = false
 
 [broker]
