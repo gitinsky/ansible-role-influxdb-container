@@ -33,6 +33,8 @@ reporting-disabled = false
 
 [data]
   dir = "/data/db"
+  wal-dir = "/data/wal"
+  wal-enable-logging = true
   enabled = true
   retention-auto-create = true
   retention-check-enabled = true
